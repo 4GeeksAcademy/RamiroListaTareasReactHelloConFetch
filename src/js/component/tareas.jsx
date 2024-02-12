@@ -14,8 +14,11 @@ const Tareas = () => {
     function sumbitTask(e) {
        
             if (e.key === "Enter") {
-            setList(list.concat(<li>{task}</li>))
+            e.preventDefault();
+            setList(list.concat([task]));
+            // setList(list.concat({task}))
             // setMap(list.map((i)=><li>{i}</li>)) !!!!IMPORTANTE MAP
+            // setList(list.concat(<li>{task}</li>))
             setTask("")
         }
     };
@@ -33,7 +36,7 @@ const Tareas = () => {
             </div>
             <div className="mx-auto">
                 <ul className="mx-auto ">
-                    {list}
+                    {list.map((item, index) => (<li key={index}>{item}</li>))}
                 </ul>
             </div>
 		</div>
