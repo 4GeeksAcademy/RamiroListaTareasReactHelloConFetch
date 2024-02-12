@@ -23,7 +23,13 @@ const Tareas = () => {
         }
     };
     
-    
+    // const removeTask = (index) => {
+    //     setList(list.filter((_, i) => i !== index));
+    //   };
+    //   boton que va en la li de la task
+    //   <button className="btn btn-danger ml-2" onClick={() => removeTask(index)}>
+    //   X
+    // </button>
     
 
    
