@@ -16,3 +16,16 @@ ul{
     font-size: 16pt;
 
 }
+.oculto{
+    display: none;
+}
+
+
+#oculto:hover .oculto{
+    display: block;
+}
+
+.tareasPorHacer{
+    color: gray;
+    font-size: medium;
+}

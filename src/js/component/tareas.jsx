@@ -25,6 +25,7 @@ const Tareas = () => {
 
     const removeTask = (index) => {
         setList(list.filter((_, i) => i !== index));
+        console.log(index);
     };
     //   boton que va en la li de la task
     //   <button className="btn btn-danger ml-2" onClick={() => removeTask(index)}>
@@ -42,9 +43,10 @@ const Tareas = () => {
             </div>
             <div className="mx-auto">
                 <ul className="mx-auto px-2">
-                    {list.map((item, index) => (<li key={index} className="d-flex justify-content-between">{item}<button className="btn btn-transparent text-danger ml-5" onClick={() => removeTask(index)}>
+                    {list.map((item, index) => (<li id="oculto" key={index} className="d-flex justify-content-between">{item}<button className="btn btn-transparent text-danger ml-5 oculto" onClick={() => removeTask(index)}>
                         X
                     </button></li>))}
+                    <li className="tareasPorHacer d-flex">{list.length} tareas por Hacer</li>
                 </ul>
             </div>
         </div>
