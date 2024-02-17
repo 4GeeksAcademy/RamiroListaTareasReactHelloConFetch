@@ -162,7 +162,7 @@ const Tareas = () => {
         <div className="container">
             <div className="">
                 {/* <!-- Button trigger modal --> */}
-                <button type="button" className="btn btn-primary m-2 align-middle " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" className="btn degradado m-2 align-middle " data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Iniciar Sesión / Registrarse
                 </button>
 
