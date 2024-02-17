@@ -37,8 +37,6 @@ const Tareas = () => {
 
     function postRegistrar(name) {
 
-        // const data = [];
-
         fetch(`https://playground.4geeks.com/apis/fake/todos/user/${name}`, {
             method: "POST",
             body: JSON.stringify([]),
@@ -61,56 +59,36 @@ const Tareas = () => {
                 // Manejo de errores
                 console.log(error);
             });
-
-
     }
 
     function getIniciar(name) {
-    
+
         fetch(`https://playground.4geeks.com/apis/fake/todos/user/${name}`)
-          .then((resp) => {
-            if (!resp.ok) {
-              throw new Error("Error en la respuesta del servidor");
-            }
-            return resp.json();
-          })
-          .then((data) => {
-            setList(data);
-          })
-          .catch((error) => {
-            if (error.name === "AbortError") {
-              console.log("La petición ha sido cancelada");
-            } else {
-              console.log("Hubo un error en la petición:", error);
-            }
-          });}
+            .then(resp => {
+                console.log(resp.ok); // Será true si la respuesta es exitosa
+                console.log(resp.status); // El código de estado 200, 300, 400, etc.
+                if (resp.status == 404) {
+                    postRegistrar(name)
+                    throw new Error("Error en la respuesta del servidor"); // !!Super Importante, sin eso no andaba 
+                }
+                // console.log(resp.text()); // Intentará devolver el resultado exacto como string
+                return resp.json(); // Intentará parsear el resultado a JSON y retornará una promesa donde puedes usar .then para seguir con la lógica
+            })
+            .then(data => {
+                // Aquí es donde debe comenzar tu código después de que finalice la búsqueda
+                // setList(data);
+                setList(data)
+                 // Esto imprimirá en la consola el objeto exacto recibido del servidor
 
-    // function getIniciar(name) {
-
-    //     fetch(`https://playground.4geeks.com/apis/fake/todos/user/${name}`)
-    //         .then(resp => {
-    //             console.log(resp.ok); // Será true si la respuesta es exitosa
-    //             console.log(resp.status); // El código de estado 200, 300, 400, etc.
-    //             if (resp.status == 404) {
-    //                 postRegistrar(name)
-    //             }
-    //             // console.log(resp.text()); // Intentará devolver el resultado exacto como string
-    //             return resp.json(); // Intentará parsear el resultado a JSON y retornará una promesa donde puedes usar .then para seguir con la lógica
-    //         })
-    //         .then(data => {
-    //             // Aquí es donde debe comenzar tu código después de que finalice la búsqueda
-    //             setList(data);
-                
-    //              // Esto imprimirá en la consola el objeto exacto recibido del servidor
-
-    //             console.log(data)
-    //             console.log(list);
-    //         })
-    //         .catch(error => {
-    //             // Manejo de errores
-    //             console.log(error);
-    //         });
-    // }
+                console.log(data)
+                console.log(list);
+            })
+            .catch(error => {
+                // Manejo de errores
+                console.log(error);
+            });
+            
+    }
 
     function putGuardar(array) {
         fetch(`https://playground.4geeks.com/apis/fake/todos/user/${inputValue}`, {
@@ -162,6 +140,8 @@ const Tareas = () => {
         console.log(index);
         putGuardar(list)
     };
+
+    
     //   boton que va en la li de la task
     //   <button className="btn btn-danger ml-2" onClick={() => removeTask(index)}>
     //   X
@@ -180,9 +160,9 @@ const Tareas = () => {
 
     return (
         <div className="container">
-            <div>
+            <div className="">
                 {/* <!-- Button trigger modal --> */}
-                <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" className="btn btn-primary m-2 align-middle " data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Iniciar Sesión / Registrarse
                 </button>
 
@@ -207,7 +187,7 @@ const Tareas = () => {
 
 
 
-                <h1 className="mx-auto text-center">TAREAS</h1>
+                <h1 className="mx-auto text-center align-middle">TAREAS</h1>
             </div>
             <div className="mx-auto text-center ">
                 <input className="bg-success p-2" onChange={addTask} value={task} onKeyDown={sumbitTask} ></input>
@@ -216,7 +196,7 @@ const Tareas = () => {
                 <ul className="mx-auto px-2">
                     {list.map((item, index) => (<li id="oculto" key={index} className="d-flex justify-content-between">{item.label}<button className="btn btn-transparent text-danger ml-5 oculto" onClick={() => removeTask(index)}>
                         X
-                    </button></li>))}
+                    </button></li>))}                    
                     <li className="tareasPorHacer d-flex">{list.length} tareas por Hacer</li>
                 </ul>
             </div>
