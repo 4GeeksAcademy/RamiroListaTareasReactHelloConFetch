@@ -5,8 +5,8 @@ import React, { useState, useEffect } from "react";
 const Tareas = () => {
     const [task, setTask] = useState("")
     const [list, setList] = useState([])
-    // const [inicio, setInicio] = useState("")
     const [inputValue, setInputValue] = useState("");
+    // const [inicio, setInicio] = useState("")
     // const [nameRegistro, setNameRegistro] = useState("")
     // const [map,setMap]=useState([]) !!!!IMPORTANTE MAP
 
@@ -125,20 +125,22 @@ const Tareas = () => {
         if (e.key === "Enter") {
             e.preventDefault();
             // setList(list.concat({ label:task, done: false }));
-            setList(list.concat({ label: task, done: false }))
+            let listaConcat = list.concat({ label: task, done: false })    //   !!!Importante Modificar una variable ya que el estado 
+            setList(list.concat({ label: task, done: false }))            //       se demora y no funciona
             // putGuardar(list)
             // setList(list.concat({task}))
             // setMap(list.map((i)=><li>{i}</li>)) !!!!IMPORTANTE MAP
             // setList(list.concat(<li>{task}</li>))
             setTask("")
-            putGuardar(list)
+            putGuardar(listaConcat)
         }
     };
 
     const removeTask = (index) => {
-        setList(list.filter((item, i) => i !== index));
+        let listaDelete = list.filter((item, i) => i !== index)  //   !!!Importante Modificar una variable ya que el estado 
+        setList(list.filter((item, i) => i !== index));         //       se demora y no funciona
         console.log(index);
-        putGuardar(list)
+        putGuardar(listaDelete)
     };
 
     
